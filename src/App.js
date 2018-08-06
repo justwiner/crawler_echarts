@@ -1,19 +1,57 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { Layout, Menu, Icon } from 'antd';
+import {BrowserRouter, Link, Route} from 'react-router-dom'
 import './App.css';
+const { Header, Sider, Content } = Layout;
 
 class App extends Component {
+  state = {
+    collapsed: false,
+  };
+  toggle = () => {
+    this.setState({
+      collapsed: !this.state.collapsed,
+    });
+  }
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <BrowserRouter>
+        <Layout id="layout-content">
+          <Sider
+            trigger={null}
+            collapsible
+            collapsed={this.state.collapsed}
+          >
+            <div className="logo" />
+            <Menu theme="dark" mode="inline" defaultSelectedKeys={[window.location.pathname]}>
+              <Menu.Item key="/">
+                <Link to='/'>
+                  <Icon type="area-chart" />
+                  <span>统计</span>
+                </Link>
+              </Menu.Item>
+              <Menu.Item key="/table">
+                <Link to='/table'>
+                  <Icon type="table" />
+                  <span>图表</span>
+                </Link>
+              </Menu.Item>
+            </Menu>
+          </Sider>
+          <Layout>
+            <Header style={{ background: '#fff', padding: 0 }}>
+              <Icon
+                className="trigger"
+                type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
+                onClick={this.toggle}
+              />
+            </Header>
+            <Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280 }}>
+              Content
+            </Content>
+          </Layout>
+        </Layout>
+      </BrowserRouter>
     );
   }
 }
