@@ -5,7 +5,6 @@ body, #root, #layout-content {
 #layout-content .trigger {
   font-size: 18px;
   line-height: 64px;
-  padding: 0 24px;
   cursor: pointer;
   transition: color .3s;
 }
@@ -18,4 +17,16 @@ body, #root, #layout-content {
   height: 32px;
   background: rgba(255,255,255,.2);
   margin: 16px;
+}
+
+#layout-content .header {
+  background: #fff;
+  padding: 0 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#layout-content .refresh {
+
 }

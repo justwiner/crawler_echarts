@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import {Table, message} from 'antd'
 import moment from 'moment'
-import {Service} from '../../lib'
 
 
 const columns = [
@@ -44,24 +43,14 @@ class Tables extends Component {
         }
     }
     componentWillMount () {
-        this.loadData()
+        this.loadData(this.props)
     }
-    async loadData () {
+    componentWillReceiveProps (nextProps) {
+        this.loadData(nextProps)
+    }
+    loadData (props) {
         this.setState({loading: true})
-        let tableData_ = []
-        const from = [1],
-               res = (await Service.getjobs({from})).data,
-               msg = res.msg;
-        if (res.success) {
-            if(from.includes(1)) {
-                const {zhiPin} = res
-                tableData_.push(...zhiPin.data)
-            }
-            message.success(msg)
-        } else {
-            message.warning(msg)
-        }
-        tableData_ = handleTableData(tableData_)
+        const tableData_ = handleTableData(props.jobs)
         this.setState({loading: false, tableData: tableData_})
         function handleTableData (data) {
             const handledData = data.map((e, i) => {
