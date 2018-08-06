@@ -20,6 +20,7 @@ class App extends Component {
     await this.loadData()
   }
   async loadData () {
+    // 对得到的数据，进行处理，在table中展示
     async function handleTableData (data) {
         const handledData = data.map((e, i) => {
             const {_id, primary, company, updateAt, dataFromName} = e
@@ -46,8 +47,8 @@ class App extends Component {
     let jobs = []
     let tableData = []
     const from = [1],
-          res = (await Service.getjobs({from})).data,
-          msg = res.msg;
+           res = (await Service.getjobs({from})).data,
+           msg = res.msg;
     if (res.success) {
         if(from.includes(1)) {
             const {zhiPin} = res
