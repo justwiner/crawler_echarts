@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
-import {Table, message} from 'antd'
-import moment from 'moment'
+import {Table} from 'antd'
 
 
 const columns = [
@@ -49,30 +48,7 @@ class Tables extends Component {
         this.loadData(nextProps)
     }
     loadData (props) {
-        this.setState({loading: true})
-        const tableData_ = handleTableData(props.jobs)
-        this.setState({loading: false, tableData: tableData_})
-        function handleTableData (data) {
-            const handledData = data.map((e, i) => {
-                const {_id, primary, company, updateAt, dataFromName} = e
-                const {claims, salary, jobTitle} = primary
-                const {name} = company
-                const {position, education, experience,} = claims
-                return {
-                    key: i,
-                    id: _id,
-                    companyName: name,
-                    positionName: jobTitle,
-                    salary: `${salary.minSalary}K ~ ${salary.maxSalary}K`,
-                    updateAt: moment(updateAt).format('YYYY-MM-DD HH:mm:ss'),
-                    placeAt: position,
-                    education,
-                    experience,
-                    from: dataFromName
-                }
-            })
-            return handledData
-        }
+        this.setState({tableData: props.job.tableData})
     }
     render () {
         const {loading, tableData} = this.state

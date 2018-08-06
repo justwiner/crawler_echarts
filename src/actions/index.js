@@ -1,3 +1,1 @@
-export const setJobs = (jobs) => ({type: 'SETJOBS', jobs})
-
-export const setLoading = (data) => ({type: 'SETLOADING', data})
+export const firstLoad = (data) => ({type: 'FIRSTLOAD', data})

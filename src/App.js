@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Layout, Menu, Icon, Spin, Button } from 'antd';
 import {BrowserRouter, Link, Route} from 'react-router-dom'
+import moment from 'moment'
 import './App.css';
 import Table from './pages/table'
 import Statistics from './pages/statistics'
@@ -19,8 +20,31 @@ class App extends Component {
     await this.loadData()
   }
   async loadData () {
+    function handleTableData (data) {
+        const handledData = data.map((e, i) => {
+            const {_id, primary, company, updateAt, dataFromName} = e
+            const {claims, salary, jobTitle} = primary
+            const {name} = company
+            const {position, education, experience,} = claims
+            return {
+                key: i,
+                id: _id,
+                companyName: name,
+                positionName: jobTitle,
+                salary: `${salary.minSalary}K ~ ${salary.maxSalary}K`,
+                updateAt: moment(updateAt).format('YYYY-MM-DD HH:mm:ss'),
+                placeAt: position,
+                education,
+                experience,
+                from: dataFromName
+            }
+        })
+        return handledData
+    }
     this.setState({loading: true})
+    // 获取所有数据
     let jobs = []
+    let tableData = []
     const from = [1],
           res = (await Service.getjobs({from})).data,
           msg = res.msg;
@@ -30,8 +54,11 @@ class App extends Component {
             jobs.push(...zhiPin.data)
         }
     }
+    if ( jobs.length !== 0 ) {
+        tableData = handleTableData(jobs)
+    }
     this.setState({loading: false})
-    this.props.actions.setJobs(jobs)
+    this.props.actions.firstLoad({jobs, tableData})
   }
   toggle = () => {
     this.setState({
@@ -95,8 +122,7 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-      jobs: state.jobs.jobs,
-      loading: state.jobs.loading
+      job: state.jobs
   }
 }
 
