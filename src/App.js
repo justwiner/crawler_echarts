@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Layout, Menu, Icon, Spin, Button } from 'antd';
+import { Layout, Menu, Icon, Spin, Button, message } from 'antd';
 import {BrowserRouter, Link, Route} from 'react-router-dom'
 import moment from 'moment'
 import './App.css';
@@ -20,7 +20,7 @@ class App extends Component {
     await this.loadData()
   }
   async loadData () {
-    function handleTableData (data) {
+    async function handleTableData (data) {
         const handledData = data.map((e, i) => {
             const {_id, primary, company, updateAt, dataFromName} = e
             const {claims, salary, jobTitle} = primary
@@ -55,7 +55,8 @@ class App extends Component {
         }
     }
     if ( jobs.length !== 0 ) {
-        tableData = handleTableData(jobs)
+        // 处理为表格可展示的数据
+        tableData = await handleTableData(jobs)
     }
     this.setState({loading: false})
     this.props.actions.firstLoad({jobs, tableData})

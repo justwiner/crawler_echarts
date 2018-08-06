@@ -7,8 +7,6 @@
     "axios": "^0.18.0",
     "echarts": "^4.1.0",
     "moment": "^2.22.2",
-    "natural": "^0.6.1",
-    "nodejieba": "^2.2.6",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-redux": "^5.0.7",

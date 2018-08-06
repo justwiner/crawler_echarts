@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {Table} from 'antd'
+import './table.css'
 
 
 const columns = [
@@ -54,6 +55,7 @@ class Tables extends Component {
         const {loading, tableData} = this.state
         return (
             <section>
+                <div className="totalNum">共 <font>{tableData.length}</font> 条数据</div>
                 <Table
                 bordered
                 loading={loading}
