@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Layout, Menu, Icon } from 'antd';
 import {BrowserRouter, Link, Route} from 'react-router-dom'
 import './App.css';
+import Table from './pages/table'
+import Statistics from './pages/statistics'
 const { Header, Sider, Content } = Layout;
 
 class App extends Component {
@@ -47,7 +49,8 @@ class App extends Component {
               />
             </Header>
             <Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280 }}>
-              Content
+              <Route exact path="/" render={() => <Statistics />}></Route>
+              <Route path="/table" render={() => <Table />}></Route>
             </Content>
           </Layout>
         </Layout>
