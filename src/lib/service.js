@@ -4,8 +4,7 @@ import Http from './httpCreate'
 class Service {
   static get CommonService () {
     let service = Http.create({
-      baseURL: `${config.url}`,
-      timeout: config.timeOut
+      baseURL: `${config.url}`
     })
     return service
   }

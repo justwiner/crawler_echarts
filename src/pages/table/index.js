@@ -16,21 +16,25 @@ const columns = [
         dataIndex: 'salary',
         width: 150,
     }, {
+        title: '分类',
+        dataIndex: 'classifyName',
+        width: 150,
+    }, {
         title: '地点',
         dataIndex: 'placeAt',
-        width: 150,
+        width: 100,
     }, {
         title: '受教育程度',
         dataIndex: 'education',
-        width: 150,
+        width: 120,
     }, {
         title: '经验',
         dataIndex: 'experience',
-        width: 150,
+        width: 120,
     }, {
         title: '来源',
         dataIndex: 'from',
-        width: 150,
+        width: 100,
     }
 ];
 
