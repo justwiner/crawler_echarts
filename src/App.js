@@ -4,6 +4,7 @@ import {BrowserRouter, Link, Route} from 'react-router-dom'
 import './App.css';
 import Table from './pages/table'
 import Statistics from './pages/statistics'
+import Set from './pages/set'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as Actions from './actions'
@@ -75,7 +76,13 @@ class App extends Component {
                 <Menu.Item key="/table">
                   <Link to='/table'>
                     <Icon type="table" />
-                    <span>图表</span>
+                    <span>表格</span>
+                  </Link>
+                </Menu.Item>
+                <Menu.Item key="/set">
+                  <Link to='/set'>
+                    <Icon type="setting" />
+                    <span>设置</span>
                   </Link>
                 </Menu.Item>
               </Menu>
@@ -97,6 +104,7 @@ class App extends Component {
               <Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280 }}>
                 <Route exact path="/" render={() => <Statistics {...this.props}/>}></Route>
                 <Route path="/table" render={() => <Table {...this.props}/>}></Route>
+                <Route path="/set" render={() => <Set {...this.props}/>}></Route>
               </Content>
             </Layout>
           </Layout>

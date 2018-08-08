@@ -13,6 +13,14 @@ class Service {
     return await Service.CommonService.post('/getjobs', data)
   }
 
+  static async updateJobs (data) {
+    return await Service.CommonService.post('/updateJobs', data)
+  }
+
+  static async deleteTimedTask (data) {
+    return await Service.CommonService.post('/deleteTimedTask', data)
+  }
+
 }
 
 export default Service;
